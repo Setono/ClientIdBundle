@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <!--
+        DO NOT change this parameter after going to production
+        since this will result in new client ids for all visitors
+        -->
+        <parameter key="setono_client_id.cookie.name">setono_client_id</parameter>
+    </parameters>
+    <services>
+        <service id="setono_client_id.cookie.adapter.symfony_cookie_reader"
+                 class="Setono\ClientId\Cookie\Adapter\SymfonyCookieReader">
+            <argument type="service" id="request_stack"/>
+        </service>
+    </services>
+</container>
