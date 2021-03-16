@@ -42,7 +42,7 @@ final class SaveClientIdSubscriber implements EventSubscriberInterface
 
         $response = $event->getResponse();
         $response->headers->setCookie(
-            Cookie::create($this->cookieName, $this->clientIdProvider->get()->value(), new \DateTime('+360 days'))
+            Cookie::create($this->cookieName, $this->clientIdProvider->get()->toString(), new \DateTime('+360 days'))
         );
     }
 }
