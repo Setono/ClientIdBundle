@@ -14,7 +14,7 @@
 
         <service id="setono_client_id.provider.cookie_based_client_id"
                  class="Setono\ClientId\Provider\CookieBasedClientIdProvider"
-                 decorates="setono_client_id.provider.generated_client_id" decoration-priority="64">
+                 decorates="setono_client_id.provider.generated_client_id" decoration-priority="128">
             <argument type="service" id="setono_client_id.provider.cookie_based_client_id.inner"/>
             <argument type="service" id="setono_client_id.cookie.adapter.symfony_cookie_reader"/>
             <argument>%setono_client_id.cookie.name%</argument>
@@ -22,7 +22,7 @@
 
         <service id="setono_client_id.provider.cached_client_id"
                  class="Setono\ClientId\Provider\CachedClientIdProvider"
-                 decorates="setono_client_id.provider.generated_client_id" decoration-priority="128">
+                 decorates="setono_client_id.provider.generated_client_id" decoration-priority="64">
             <argument type="service" id="setono_client_id.provider.cached_client_id.inner"/>
         </service>
     </services>

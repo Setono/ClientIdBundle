@@ -40,6 +40,7 @@ final class SaveClientIdSubscriberTest extends TestCase
             {
             }
 
+            /** @psalm-suppress DeprecatedClass */
             protected function configureRoutes(RouteCollectionBuilder $routes): void
             {
             }
