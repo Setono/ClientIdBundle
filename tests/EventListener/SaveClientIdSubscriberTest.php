@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
 /**
@@ -23,6 +24,14 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
  */
 final class SaveClientIdSubscriberTest extends TestCase
 {
+    /**
+     * @test
+     */
+    public function it_subscribes_to_response_event(): void
+    {
+        self::assertSame([KernelEvents::RESPONSE => 'save'], SaveClientIdSubscriber::getSubscribedEvents());
+    }
+
     /**
      * @test
      */

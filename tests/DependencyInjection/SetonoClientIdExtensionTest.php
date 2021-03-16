@@ -28,4 +28,14 @@ final class SetonoClientIdExtensionTest extends AbstractExtensionTestCase
 
         self::assertTrue(true);
     }
+
+    /**
+     * @test
+     */
+    public function it_registers_event_listeners_with_tags(): void
+    {
+        $this->load();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithTag('setono_client_id.event_listener.save_client_id_subscriber', 'kernel.event_subscriber');
+    }
 }
