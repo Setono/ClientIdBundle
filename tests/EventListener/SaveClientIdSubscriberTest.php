@@ -49,7 +49,11 @@ final class SaveClientIdSubscriberTest extends TestCase
             {
             }
 
-            /** @psalm-suppress DeprecatedClass */
+            /**
+             * We have to use this because we support SF4.4
+             *
+             * @psalm-suppress DeprecatedClass
+             */
             protected function configureRoutes(RouteCollectionBuilder $routes): void
             {
             }
