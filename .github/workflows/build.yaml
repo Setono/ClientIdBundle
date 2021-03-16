@@ -5,7 +5,7 @@ on:
             - "master"
     pull_request: ~
     schedule:
-        - cron: "5 8 * * 1"
+        -   cron: "5 8 * * 1"
 
 jobs:
     coding-standards:
@@ -131,6 +131,10 @@ jobs:
                 dependencies:
                     - "lowest"
                     - "highest"
+
+                exclude:
+                    -   php-version: "8.0"
+                        dependencies: "lowest"
 
         steps:
             -   name: "Checkout"
