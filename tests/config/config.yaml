@@ -1,0 +1,3 @@
+parameters:
+    doctrine.dbal.connection_factory.types: []
+    
