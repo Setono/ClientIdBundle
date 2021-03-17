@@ -13,6 +13,7 @@ use Setono\ClientId\Generator\UuidClientIdGenerator;
 use Setono\ClientId\Provider\CachedClientIdProvider;
 use Setono\ClientId\Provider\ClientIdProviderInterface;
 use Setono\ClientId\Provider\CookieBasedClientIdProvider;
+use Setono\ClientIdBundle\Doctrine\Type\ClientIdType;
 use Setono\ClientIdBundle\EventListener\SaveClientIdSubscriber;
 use Setono\ClientIdBundle\SetonoClientIdBundle;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -112,5 +113,20 @@ final class SetonoClientIdBundleTest extends BaseBundleTestCase
                 );
             }
         }
+    }
+
+    /**
+     * @test
+     */
+    public function it_adds_compiler_pass(): void
+    {
+        $kernel = $this->createKernel();
+        $kernel->addConfigFile(__DIR__ . '/config/config.yaml');
+
+        $this->bootKernel();
+
+        $container = $this->getContainer();
+        self::assertTrue($container->hasParameter('doctrine.dbal.connection_factory.types'));
+        self::assertSame(['client_id' => ['class' => ClientIdType::class]], $container->getParameter('doctrine.dbal.connection_factory.types'));
     }
 }
