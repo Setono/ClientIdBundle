@@ -21,6 +21,7 @@
         "symfony/http-kernel": "^4.4 || ^5.1.5"
     },
     "require-dev": {
+        "doctrine/doctrine-bundle": "^2.1",
         "infection/infection": "^0.21.0",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
         "nyholm/symfony-bundle-test": "^1.7",

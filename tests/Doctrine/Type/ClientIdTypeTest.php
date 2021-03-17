@@ -68,6 +68,7 @@ final class ClientIdTypeTest extends TestCase
     public function it_throws_exception_when_trying_to_convert_unsupported_type_for_database_value(): void
     {
         $this->expectException(ConversionException::class);
+        $this->expectExceptionMessage("Could not convert PHP value of type 'stdClass' to type 'client_id'. Expected one of the following types: null, string, Setono\ClientId\ClientId");
 
         $this->type->convertToDatabaseValue(new \stdClass(), $this->platform);
     }
@@ -98,6 +99,7 @@ final class ClientIdTypeTest extends TestCase
     public function it_throws_exception_when_trying_to_convert_unsupported_type_for_php_value(): void
     {
         $this->expectException(ConversionException::class);
+        $this->expectExceptionMessage("Could not convert PHP value of type 'stdClass' to type 'client_id'. Expected one of the following types: null, string, Setono\ClientId\ClientId");
 
         $this->type->convertToPHPValue(new \stdClass(), $this->platform);
     }
@@ -108,6 +110,15 @@ final class ClientIdTypeTest extends TestCase
     public function it_returns_null_for_php_value_when_null_is_given(): void
     {
         self::assertNull($this->type->convertToPHPValue(null, $this->platform));
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_same_client_id_if_client_id_is_given_for_php_value(): void
+    {
+        $clientId = new ClientId(self::DUMMY_CLIENT_ID);
+        self::assertSame($clientId, $this->type->convertToPHPValue($clientId, $this->platform));
     }
 
     /**
