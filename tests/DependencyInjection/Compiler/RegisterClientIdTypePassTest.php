@@ -29,7 +29,7 @@ final class RegisterClientIdTypePassTest extends AbstractCompilerPassTestCase
         $this->compile();
 
         self::assertSame(
-            ['client_id' => ['class' => ClientIdType::class]],
+            ['client_id' => ['class' => ClientIdType::class, 'commented' => null]],
             $this->container->getParameter('doctrine.dbal.connection_factory.types')
         );
     }

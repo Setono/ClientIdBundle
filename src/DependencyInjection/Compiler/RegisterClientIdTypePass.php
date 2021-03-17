@@ -20,7 +20,10 @@ final class RegisterClientIdTypePass implements CompilerPassInterface
         $typeDefinition = $container->getParameter('doctrine.dbal.connection_factory.types');
 
         if (!isset($typeDefinition['client_id'])) {
-            $typeDefinition['client_id'] = ['class' => ClientIdType::class];
+            $typeDefinition['client_id'] = [
+                'class' => ClientIdType::class,
+                'commented' => null,
+            ];
         }
 
         $container->setParameter('doctrine.dbal.connection_factory.types', $typeDefinition);

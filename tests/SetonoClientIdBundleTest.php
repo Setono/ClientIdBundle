@@ -127,6 +127,6 @@ final class SetonoClientIdBundleTest extends BaseBundleTestCase
 
         $container = $this->getContainer();
         self::assertTrue($container->hasParameter('doctrine.dbal.connection_factory.types'));
-        self::assertSame(['client_id' => ['class' => ClientIdType::class]], $container->getParameter('doctrine.dbal.connection_factory.types'));
+        self::assertSame(['client_id' => ['class' => ClientIdType::class, 'commented' => null]], $container->getParameter('doctrine.dbal.connection_factory.types'));
     }
 }
