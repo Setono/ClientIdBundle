@@ -12,8 +12,8 @@
     "require": {
         "php": ">=7.4",
         "doctrine/dbal": "^2.12",
-        "setono/client-id": "dev-master",
-        "setono/client-id-contracts": "dev-master",
+        "setono/client-id": "^0.1",
+        "setono/client-id-contracts": "^0.1",
         "symfony/config": "^4.4 || ^5.0",
         "symfony/dependency-injection": "^4.4 || ^5.0",
         "symfony/event-dispatcher": "^4.4 || ^5.0",
@@ -27,8 +27,8 @@
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.15.1",
         "psalm/plugin-symfony": "^2.1",
-        "roave/security-advisories": "dev-master",
-        "setono/code-quality-pack": "^2.0.1"
+        "roave/security-advisories": "dev-latest",
+        "setono/code-quality-pack": "^2.1"
     },
     "config": {
         "sort-packages": true
