@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.7.3@38c452ae584467e939d55377aaf83b5a26f19dd1">
+  <file src="src/EventListener/SaveClientIdSubscriber.php">
+    <DeprecatedMethod occurrences="1">
+      <code>isMasterRequest</code>
+    </DeprecatedMethod>
+  </file>
+  <file src="tests/EventListener/SaveClientIdSubscriberTest.php">
+    <DeprecatedConstant occurrences="2">
+      <code>HttpKernelInterface::MASTER_REQUEST</code>
+      <code>HttpKernelInterface::MASTER_REQUEST</code>
+    </DeprecatedConstant>
+  </file>
+</files>
