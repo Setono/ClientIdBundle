@@ -91,7 +91,7 @@ final class SaveClientIdSubscriberTest extends TestCase
     private static function getClientIdProvider(): ClientIdProviderInterface
     {
         return new class() implements ClientIdProviderInterface {
-            public function get(): ClientId
+            public function getClientId(): ClientId
             {
                 return new ClientId('client_id');
             }
