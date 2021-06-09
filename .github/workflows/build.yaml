@@ -6,6 +6,7 @@ on:
     pull_request: ~
     schedule:
         -   cron: "5 8 * * 1"
+    workflow_dispatch: ~
 
 jobs:
     coding-standards:
