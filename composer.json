@@ -23,7 +23,7 @@
     "require-dev": {
         "infection/infection": "^0.23.0",
         "matthiasnoback/symfony-dependency-injection-test": "^4.2",
-        "nyholm/symfony-bundle-test": "^1.7",
+        "nyholm/symfony-bundle-test": "^1.7 || ^2.0",
         "phpunit/phpunit": "^9.5",
         "psalm/plugin-phpunit": "^0.16.0",
         "psalm/plugin-symfony": "^2.1",
