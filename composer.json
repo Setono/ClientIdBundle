@@ -14,11 +14,11 @@
         "doctrine/dbal": "^2.12",
         "setono/client-id": "^0.2",
         "setono/client-id-contracts": "^0.2",
-        "symfony/config": "^4.4 || ^5.0",
-        "symfony/dependency-injection": "^4.4 || ^5.0",
-        "symfony/event-dispatcher": "^4.4 || ^5.0",
-        "symfony/http-foundation": "^4.4 || ^5.0.7",
-        "symfony/http-kernel": "^4.4 || ^5.1.5"
+        "symfony/config": "^4.4 || ^5.4 || ^6.0",
+        "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
+        "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.0",
+        "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
+        "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0"
     },
     "require-dev": {
         "infection/infection": "^0.23.0",
