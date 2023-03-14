@@ -31,7 +31,7 @@ final class SaveClientIdSubscriber implements EventSubscriberInterface
 
     public function save(ResponseEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (!$event->isMainRequest()) {
             return;
         }
 
