@@ -1,8 +1,8 @@
 {
     "name": "setono/client-id-bundle",
-    "type": "symfony-bundle",
     "description": "A Symfony bundle that allows you to track your visitors server side instead of client side",
     "license": "MIT",
+    "type": "symfony-bundle",
     "authors": [
         {
             "name": "Joachim Løvgaard",
@@ -19,7 +19,8 @@
         "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
         "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.0",
         "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
-        "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0"
+        "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
+        "webmozart/assert": "^1.11"
     },
     "require-dev": {
         "infection/infection": "^0.23.0",
@@ -30,14 +31,7 @@
         "psalm/plugin-symfony": "^2.1",
         "setono/code-quality-pack": "^2.1"
     },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": false,
-            "ergebnis/composer-normalize": true,
-            "infection/extension-installer": false
-        }
-    },
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Setono\\ClientIdBundle\\": "src/"
@@ -48,7 +42,14 @@
             "Setono\\ClientIdBundle\\Tests\\": "tests/"
         }
     },
-    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": false,
+            "ergebnis/composer-normalize": true,
+            "infection/extension-installer": false
+        },
+        "sort-packages": true
+    },
     "scripts": {
         "analyse": "psalm",
         "check-style": "ecs check",

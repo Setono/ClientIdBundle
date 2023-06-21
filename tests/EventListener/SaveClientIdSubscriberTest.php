@@ -108,8 +108,9 @@ final class SaveClientIdSubscriberTest extends TestCase
                 parent::__construct('test', true);
             }
 
-            public function registerBundles(): void
+            public function registerBundles(): iterable
             {
+                return [];
             }
 
             /**
