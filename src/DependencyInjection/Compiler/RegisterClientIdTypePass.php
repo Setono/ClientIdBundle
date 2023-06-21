@@ -7,6 +7,7 @@ namespace Setono\ClientIdBundle\DependencyInjection\Compiler;
 use Setono\ClientIdBundle\Doctrine\Type\ClientIdType;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Webmozart\Assert\Assert;
 
 final class RegisterClientIdTypePass implements CompilerPassInterface
 {
@@ -16,16 +17,17 @@ final class RegisterClientIdTypePass implements CompilerPassInterface
             return;
         }
 
-        /** @var array<string, mixed> $typeDefinition */
-        $typeDefinition = $container->getParameter('doctrine.dbal.connection_factory.types');
+        /** @psalm-suppress UndefinedDocblockClass */
+        $typeDefinitions = $container->getParameter('doctrine.dbal.connection_factory.types');
+        Assert::isArray($typeDefinitions);
 
-        if (!isset($typeDefinition['client_id'])) {
-            $typeDefinition['client_id'] = [
+        if (!isset($typeDefinitions['client_id'])) {
+            $typeDefinitions['client_id'] = [
                 'class' => ClientIdType::class,
                 'commented' => null,
             ];
         }
 
-        $container->setParameter('doctrine.dbal.connection_factory.types', $typeDefinition);
+        $container->setParameter('doctrine.dbal.connection_factory.types', $typeDefinitions);
     }
 }

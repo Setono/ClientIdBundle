@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Setono\ClientIdBundle\EventListener;
 
 use Setono\ClientId\Provider\ClientIdProviderInterface;
+use Setono\MainRequestTrait\MainRequestTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
@@ -12,6 +13,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 final class SaveClientIdSubscriber implements EventSubscriberInterface
 {
+    use MainRequestTrait;
+
     private ClientIdProviderInterface $clientIdProvider;
 
     private string $cookieName;
@@ -31,7 +34,7 @@ final class SaveClientIdSubscriber implements EventSubscriberInterface
 
     public function save(ResponseEvent $event): void
     {
-        if (!$event->isMasterRequest()) {
+        if (!$this->isMainRequest($event)) {
             return;
         }
 
@@ -41,8 +44,10 @@ final class SaveClientIdSubscriber implements EventSubscriberInterface
         }
 
         $response = $event->getResponse();
-        $response->headers->setCookie(
-            Cookie::create($this->cookieName, $this->clientIdProvider->getClientId()->toString(), new \DateTime('+360 days'))
-        );
+        $response->headers->setCookie(Cookie::create(
+            $this->cookieName,
+            $this->clientIdProvider->getClientId()->toString(),
+            new \DateTime('+360 days')
+        ));
     }
 }

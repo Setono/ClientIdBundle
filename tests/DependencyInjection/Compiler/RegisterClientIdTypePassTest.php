@@ -28,9 +28,9 @@ final class RegisterClientIdTypePassTest extends AbstractCompilerPassTestCase
 
         $this->compile();
 
-        self::assertSame(
-            ['client_id' => ['class' => ClientIdType::class, 'commented' => null]],
-            $this->container->getParameter('doctrine.dbal.connection_factory.types')
-        );
+        /** @psalm-suppress UndefinedDocblockClass */
+        $typeDefinitions = $this->container->getParameter('doctrine.dbal.connection_factory.types');
+
+        self::assertSame(['client_id' => ['class' => ClientIdType::class, 'commented' => null]], $typeDefinitions);
     }
 }
