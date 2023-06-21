@@ -40,7 +40,7 @@ final class SaveClientIdSubscriberTest extends TestCase
     {
         $response = new Response();
 
-        $event = new ResponseEvent(self::getKernel(), new Request(), 1, $response);
+        $event = new ResponseEvent(self::getKernel(), new Request(), HttpKernelInterface::MAIN_REQUEST, $response);
 
         $subscriber = new SaveClientIdSubscriber(self::getClientIdProvider(), 'cookie_name');
         $subscriber->save($event);
@@ -78,7 +78,7 @@ final class SaveClientIdSubscriberTest extends TestCase
         $event = new ResponseEvent(
             self::getKernel(),
             new Request([], [], [], [], [], ['HTTP_X-Requested-With' => 'XMLHttpRequest']),
-            1,
+            HttpKernelInterface::MAIN_REQUEST,
             $response
         );
 
