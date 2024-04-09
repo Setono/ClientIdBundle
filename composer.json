@@ -30,7 +30,7 @@
         "phpunit/phpunit": "^9.6",
         "psalm/plugin-phpunit": "^0.19",
         "psalm/plugin-symfony": "^5.1",
-        "setono/client-bundle": "dev-master",
+        "setono/client-bundle": "^1.0@alpha",
         "setono/code-quality-pack": "^2.7"
     },
     "prefer-stable": true,
