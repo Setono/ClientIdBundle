@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Setono\ClientIdBundle\Tests;
 
-use Nyholm\BundleTest\BaseBundleTestCase;
-use Nyholm\BundleTest\CompilerPass\PublicServicePass;
+use Nyholm\BundleTest\TestKernel;
 use Setono\ClientId\Cookie\Adapter\SymfonyCookieReader;
 use Setono\ClientId\Cookie\CookieReaderInterface;
 use Setono\ClientId\Generator\ClientIdGeneratorInterface;
@@ -16,20 +15,50 @@ use Setono\ClientId\Provider\CookieBasedClientIdProvider;
 use Setono\ClientIdBundle\Doctrine\Type\ClientIdType;
 use Setono\ClientIdBundle\EventListener\SaveClientIdSubscriber;
 use Setono\ClientIdBundle\SetonoClientIdBundle;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
-final class SetonoClientIdBundleTest extends BaseBundleTestCase
+final class SetonoClientIdBundleTest extends KernelTestCase
 {
+    protected static function getKernelClass(): string
+    {
+        return TestKernel::class;
+    }
+
     protected function getBundleClass(): string
     {
         return SetonoClientIdBundle::class;
     }
 
-    protected function setUp(): void
+    protected static function createKernel(array $options = []): KernelInterface
     {
-        parent::setUp();
+        /**
+         * @var TestKernel $kernel
+         */
+        $kernel = parent::createKernel($options);
+        $kernel->addTestBundle(SetonoClientIdBundle::class);
+        $kernel->addTestCompilerPass(new class() implements CompilerPassInterface {
+            public function process(ContainerBuilder $container): void
+            {
+                foreach ($container->getDefinitions() as $id => $definition) {
+                    if (str_starts_with($id, 'setono')) {
+                        $definition->setPublic(true);
+                    }
+                }
 
-        $this->addCompilerPass(new PublicServicePass('#setono.*#i'));
+                foreach ($container->getAliases() as $id => $alias) {
+                    if (str_starts_with($id, 'setono')) {
+                        $alias->setPublic(true);
+                    }
+                }
+            }
+        });
+        $kernel->handleOptions($options);
+
+        return $kernel;
     }
 
     /**
@@ -37,8 +66,7 @@ final class SetonoClientIdBundleTest extends BaseBundleTestCase
      */
     public function it_has_services(): void
     {
-        $this->bootKernel();
-        $container = $this->getContainer();
+        $container = self::getContainer();
 
         $services = [
             // cookie.xml
@@ -101,7 +129,7 @@ final class SetonoClientIdBundleTest extends BaseBundleTestCase
                 self::assertInstanceOf(
                     $data['class'],
                     $service,
-                    sprintf('Service with id "%s" is not an instance of %s. It is an instance of %s', $id, $data['class'], get_class($service))
+                    sprintf('Service with id "%s" is not an instance of %s. It is an instance of %s', $id, $data['class'], get_class($service)),
                 );
             }
 
@@ -109,7 +137,7 @@ final class SetonoClientIdBundleTest extends BaseBundleTestCase
                 self::assertInstanceOf(
                     $data['interface'],
                     $service,
-                    sprintf('Service with id "%s" is not an instance of %s. It is an instance of %s', $id, $data['interface'], get_class($service))
+                    sprintf('Service with id "%s" is not an instance of %s. It is an instance of %s', $id, $data['interface'], get_class($service)),
                 );
             }
         }
@@ -120,12 +148,10 @@ final class SetonoClientIdBundleTest extends BaseBundleTestCase
      */
     public function it_adds_compiler_pass(): void
     {
-        $kernel = $this->createKernel();
-        $kernel->addConfigFile(__DIR__ . '/config/config.yaml');
-
-        $this->bootKernel();
-
-        $container = $this->getContainer();
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__ . '/config/config.yaml');
+        }]);
+        $container = $kernel->getContainer();
 
         /** @psalm-suppress UndefinedDocblockClass */
         $typeDefinitions = $container->getParameter('doctrine.dbal.connection_factory.types');

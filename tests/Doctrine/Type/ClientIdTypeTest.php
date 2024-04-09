@@ -68,7 +68,7 @@ final class ClientIdTypeTest extends TestCase
     public function it_throws_exception_when_trying_to_convert_unsupported_type_for_database_value(): void
     {
         $this->expectException(ConversionException::class);
-        $this->expectExceptionMessage("Could not convert PHP value of type 'stdClass' to type 'client_id'. Expected one of the following types: null, string, Setono\ClientId\ClientId");
+        $this->expectExceptionMessage('Could not convert PHP value of type stdClass to type client_id. Expected one of the following types: null, string, Setono\ClientId\ClientId');
 
         $this->type->convertToDatabaseValue(new \stdClass(), $this->platform);
     }
@@ -99,7 +99,7 @@ final class ClientIdTypeTest extends TestCase
     public function it_throws_exception_when_trying_to_convert_unsupported_type_for_php_value(): void
     {
         $this->expectException(ConversionException::class);
-        $this->expectExceptionMessage("Could not convert PHP value of type 'stdClass' to type 'client_id'. Expected one of the following types: null, string, Setono\ClientId\ClientId");
+        $this->expectExceptionMessage('Could not convert PHP value of type stdClass to type client_id. Expected one of the following types: null, string, Setono\ClientId\ClientId');
 
         $this->type->convertToPHPValue(new \stdClass(), $this->platform);
     }
