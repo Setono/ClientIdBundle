@@ -3,6 +3,7 @@
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <!-- This service is registered if the setono/client-bundle is NOT installed -->
         <service id="setono_client_id.event_listener.save_client_id_subscriber"
                  class="Setono\ClientIdBundle\EventListener\SaveClientIdSubscriber">
             <argument type="service" id="setono_client_id.provider.default_client_id"/>

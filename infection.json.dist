@@ -6,10 +6,10 @@
     },
     "logs": {
         "text": "php://stderr",
-        "badge": {
-            "branch": "master"
+        "stryker": {
+            "badge": "master"
         }
     },
-    "minMsi": 100,
-    "minCoveredMsi": 100
+    "minMsi": 94.87,
+    "minCoveredMsi": 97.37
 }

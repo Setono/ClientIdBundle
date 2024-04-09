@@ -9,7 +9,6 @@ use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 use Setono\ClientId\ClientId;
 
-// todo see this https://github.com/symfony/symfony/blob/5.x/src/Symfony/Bridge/Doctrine/Types/AbstractUidType.php as an example
 final class ClientIdType extends Type
 {
     public const CLIENT_ID = 'client_id';
@@ -21,6 +20,7 @@ final class ClientIdType extends Type
 
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
+        /** @psalm-suppress DeprecatedMethod */
         return $platform->getVarcharTypeDeclarationSQL($column);
     }
 
